@@ -1,6 +1,7 @@
 import re
 import os
 import argparse
+import pyperclip
 
 
 def generate_chromatic_url(input_string, app_id):
@@ -31,14 +32,14 @@ def main():
     args = parser.parse_args()
 
     # Read the Chromatic App ID from environment variable
-    app_id = os.getenv('NINETY_CHROMATIC_ID')
+    app_id = os.getenv('CHROMATIC_ID')
     if not app_id:
-        print("Error: NINETY_CHROMATIC_ID environment variable is not set.")
-        return
+        raise Exception("CHROMATIC_ID environment variable is not set.")
 
     # Generate and print the Chromatic URL
     url = generate_chromatic_url(args.input_string, app_id)
-    print("Chromatic URL:", url)
+    pyperclip.copy(url)
+    print("Copied Chromatic URL to the clipboard:", url)
 
 
 if __name__ == "__main__":
